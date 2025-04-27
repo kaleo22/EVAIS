@@ -1,0 +1,6 @@
+[submodule "LangSAM"]
+	path = LangSAM
+	url = git@github.com:kaleo22/LangSAM.git
+[submodule "ByteTrack"]
+	path = ByteTrack
+	url = git@github.com:kaleo22/ByteTrack.git
