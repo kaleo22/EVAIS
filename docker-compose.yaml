@@ -1,0 +1,54 @@
+version: "3"
+services:
+  emqx1:
+    image: emqx:latest
+    container_name: emqx1
+    ports:
+      - "1883:1883"  # MQTT port
+      - "8083:8083"  # WebSocket port
+      - "18083:18083"  # Dashboard port
+    environment:
+      - "EMQX_NAME: emqx1"
+      - "EMQX_HOST: emqx1.eqmx.io"
+      - "EMQX_CLUSTER__DISCOVERY_STRATEGY=dns"
+      - "EMQX_CLUSTER__DNS__RESOLVER=8.8.8.8"
+      - "EMQX_CLUSTER__DNS__INTERVAL=100"
+    volumes:
+      - ./emqx1/data:/opt/emqx/data
+      - ./emqx1/log:/opt/emqx/log
+
+  LANG_Sam:
+    image: lang-segment-anything:v2
+    container_name: lang-segment-anything
+    ports:
+      - "5000:5000"  # API port
+    environment:
+      - "LANG_SAM_NAME: lang-segment-anything"
+      - "LANG_SAM_HOST: lang-segment-anything.eqmx.io"
+      - "LANG_SAM_CLUSTER__DISCOVERY_STRATEGY=dns"
+      - "LANG_SAM_CLUSTER__DNS__RESOLVER=8.8.8.8"
+    networks:
+      -evais_network
+    volumes:
+      - ./lang-segment-anything:./lang-segment-anything
+    depends_on:
+      - emqx1
+
+  ByteTrack:
+    image: byte-track:latest
+    container_name: byte-track
+    ports:
+      - "6000:6000"  # API port
+    environment:
+      - "BYTE_TRACK_NAME: byte-track"
+      - "BYTE_TRACK_HOST: byte-track.eqmx.io"
+      - "BYTE_TRACK_CLUSTER__DISCOVERY_STRATEGY=dns"
+      - "BYTE_TRACK_CLUSTER__DNS__RESOLVER=8.8.8.8"
+      - "BYTE_TRACK_CLUSTER__DNS__INTERVAL=100"
+    networks:
+      - evais_network
+    volumes:
+      - ./byte-track:/opt/byte-track/data
+    depends_on:
+      - emqx1
+      - lang-segment-anything
