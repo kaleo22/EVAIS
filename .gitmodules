@@ -4,3 +4,6 @@
 [submodule "ByteTrack"]
 	path = ByteTrack
 	url = git@github.com:kaleo22/ByteTrack.git
+[submodule "OneFormer"]
+	path = OneFormer
+	url = git@github.com:kaleo22/OneFormer.git
