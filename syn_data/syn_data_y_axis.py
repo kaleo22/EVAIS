@@ -34,7 +34,7 @@ def parse_float_list(s: str) -> list[float]:
 p = argparse.ArgumentParser(description="Tutorial on creating an empty stage.")
 p.add_argument("--num_instances", type=int, default=3, help="Wie oft das gleiche USD in die Stage gesetzt wird.")
 p.add_argument("--output_dir", type=str, default="output_dataset", help="Output-Verzeichnis für das Dataset.")
-p.add_argument("--wheel_spacing", type=parse_float_list, default="[5.0]", help="Abstände zwischen den Rädern in Metern (x).")
+p.add_argument("--wheel_spacing", type=parse_float_list, default=["5.0"], help="Abstände der Rädern in Metern (x) zum Vorderrad.")
 
 # append AppLauncher cli args
 AppLauncher.add_app_launcher_args(p)
@@ -290,7 +290,7 @@ def create_wheels(scene: InteractiveScene, spacings: list[float]) -> tuple[list[
     front_wheel_cfg = AssetBaseCfg(
         prim_path=prim_path_front,
         spawn=sim_utils.UsdFileCfg(usd_path=USD_PATH_2,
-                                   scale=(1.0, 1.0, 1.0),
+                                   scale=(0.8, 0.8, 0.8),
                                       semantic_tags=[("Class", "Wheel")])
     )
     prim_front = add_reference_to_stage(usd_path=USD_PATH_2, prim_path=prim_path_front, prim_type="Xform")
@@ -304,7 +304,7 @@ def create_wheels(scene: InteractiveScene, spacings: list[float]) -> tuple[list[
         wheel_cfg = AssetBaseCfg(
             prim_path=prim_path,
             spawn=sim_utils.UsdFileCfg(usd_path=USD_PATH,
-                             scale=(1.0, 1.0, 1.0),
+                             scale=(0.8, 0.8, 0.8),
                                 semantic_tags=[("Class", "Wheel")])
         )
 
@@ -465,7 +465,7 @@ def run() -> None:
     vehicle.step(0.0)
     #vehicle.base_pos = np.array([0.0, 0.0, vehicle.wheel_radius_m], dtype=np.float64)
 
-    frames = 500  # Beispiel
+    frames = 120  # Beispiel
     for frame_idx in range(frames):
         if not simulation_app.is_running():
             break

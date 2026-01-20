@@ -3,6 +3,18 @@
 # Generated datasets / artifacts
 /syn_data/gif/
 /syn_data/output_dataset/
+/syn_data/1x1
+syn_data/2x2
+syn_data/1x2
+syn_data/2x1
+syn_data/1x3
+syn_data/Anhaenger2
+syn_data/Anhaenger3
+syn_data/Anhaenger_4
+syn_data/Anhaenger_5
+syn_data/Sattelzug1x1
+syn_data/Sattelzug1x2
+
 
 # VS Code browsing database (can be huge)
 /.vscode/*.vc.db*
