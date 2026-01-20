@@ -1,0 +1,8 @@
+# Repo-level ignores
+
+# Generated datasets / artifacts
+/syn_data/gif/
+/syn_data/output_dataset/
+
+# VS Code browsing database (can be huge)
+/.vscode/*.vc.db*
